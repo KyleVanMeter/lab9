@@ -1,24 +1,40 @@
 <%- include ../layouts/header.ejs %>
 <% if (messages.error) { %>
-<p style="color:red"><%- messages.error %></p>
+    <p style="color:red"><%- messages.error %></p>
 <% } %>
 <% if (messages.success) { %>
-<p style="color:green"><%- messages.success %></p>
+    <p style="color:green"><%- messages.success %></p>
 <% } %>
 <table width='60%' border=0>
-<tr style='text-align:left; background-color:#CCC'>
-<th>Name</th>
-<th>Quantity</th>
-<th>Price</th>
-</tr>
-<% if (data) { %>
-<% data.forEach(function(item){ %>
-<tr>
-<td><%= item.sname %></td>
-<td><%= item.qty %></td>
-<td><%= item.price %></td>
-</tr>
-<% }) %>
-<% } %>
+    <tr style='text-align:left; background-color:#CCC'>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Action </th>
+    </tr>
+    <% if (data) { %>
+        <% data.forEach(function(item){ %>
+            <tr>
+                <td><%= item.sname %></td>
+                <td><%= item.qty %></td>
+                <td><%= item.price %></td>
+
+                <td>
+                    <div style="float:left">
+                        <a href='/store/edit/<%= item.id %>'>Edit</a> &nbsp;
+                        <form method="post" action="/store/delete/<%= item.id %>"
+                              style="float:right">
+                            <input type="submit" name="delete" value='Delete'
+                                   onClick="return confirm('Are you sure you want to delete?')" />
+                            <input type="hidden" name="_method" value="DELETE" />
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    <% } %>
 </table>
 <%- include ../layouts/footer.ejs %>
+
+
+
