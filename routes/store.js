@@ -158,7 +158,7 @@ app.put('/edit/(:id)', function(req, res, next) {
             price: req.sanitize('price').escape().trim()
         }
         req.getConnection(function(error, conn) {
-            conn.query('UPDATE store set sname = ' + item.sname + ', qty =' + item.qty + ', price = ' + item.price, function(err, result) {
+            conn.query('UPDATE store SET sname =\'' + item.sname + '\', qty =' + item.qty + ', price =' + item.price + ' WHERE id = ' + req.params.id, function(err, result) {
                 if (err) {
                     req.flash('', err)
                     // render to views/store/edit.ejs
@@ -173,9 +173,9 @@ app.put('/edit/(:id)', function(req, res, next) {
                          above for you.
                          Beware I have used req.params but
                          below you need to use req.body*/
-                        sname: req.params.sname,
-                        qty: req.params.qty,
-                        price: req.param.price
+                        sname: req.body.sname,
+                        qty:   req.body.qty,
+                        price: req.body.price
                     })
                 } else {
                     req.flash('success', 'Data updated successfully!')
@@ -192,9 +192,9 @@ app.put('/edit/(:id)', function(req, res, next) {
                          Beware I have used req.params but
                          below you need to use req.body*/
 
-                        sname: req.params.sname,
-                        qty: req.params.qty,
-                        price: req.param.price
+                        sname: req.body.sname,
+                        qty:   req.body.qty,
+                        price: req.body.price
                     })
                 }
             })
@@ -217,9 +217,9 @@ app.put('/edit/(:id)', function(req, res, next) {
              Beware I have used req.params but below you need to
              use req.body*/
 
-            sname: req.params.sname,
-            qty: req.params.qty,
-            price: req.param.price
+            sname: req.body.sname,
+            qty:   req.body.qty,
+            price: req.body.price
         })
     }
 })
