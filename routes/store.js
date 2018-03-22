@@ -224,5 +224,22 @@ app.put('/edit/(:id)', function(req, res, next) {
     }
 })
 
+// DELETE Item. Pass the right id in the URL.
+app.delete('/delete/(:id)', function(req, res, next) {
+    req.getConnection(function(error, conn) {
+        conn.query('DELETE FROM store WHERE id=' + req.params.id, function(err, result) {
+            if (err) {
+                req.flash('error', err)
+                // redirect to users list page
+                res.redirect('/store')
+            } else {
+                req.flash('success', 'DELETED: row with id = ' + req.params.id)
+                // redirect to users list page
+                res.redirect('/store')
+            }
+        })
+    })
+})
+
 module.exports = app // This must be the last line in the file. Any  and all code
 //must be added before this line
