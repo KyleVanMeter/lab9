@@ -132,10 +132,10 @@ app.get('/edit/(:id)', function(req, res, next){
                      from database.
                      Get the right values from rows[0]
                      */
-                    id: rows[0],
-                    qty: rows[2],
-                    price: rows[3],
-                    sname: rows[1],
+                    id:    rows[0].id,
+                    qty:   rows[0].qty,
+                    price: rows[0].price,
+                    sname: rows[0].sname,
                 })
             }
         })
