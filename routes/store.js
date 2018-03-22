@@ -180,7 +180,7 @@ app.put('/edit/(:id)', function(req, res, next) {
                 } else {
                     req.flash('success', 'Data updated successfully!')
                     // render to views/store/edit.ejs
-                    res.render('/store/edit', {
+                    res.render('store/edit' , {
                         title: 'Edit Item',
                         id: req.params.id,
                         /* Since this is update query part,
